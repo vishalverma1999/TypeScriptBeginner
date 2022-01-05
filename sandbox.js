@@ -1,23 +1,30 @@
-// fundamental difference between typescript and JavaScript is that typescript uses strict types, that means if we define a variable as a string then in typescript it will always be a string and it's type cannot be changed later and the same would be true of any other type like numbers, booleans, objects, arrays
-// we don't have to specifically say the character is going to be a string typescript uses what's known as inference or it infers the type based on the value we assign it, although we can explicitly provide the type of variable
-
-var character = 'mario';
-var age = 30;
-var isBlackBelt = false;
-
-// character = 20;    // Error- Type 'number' is not assignable to type 'string'
-character = 'vishal';
-
-// age = 'yoshi';       // Error- Type 'string' is not assignable to type 'number'
-age = 20;
-
-// isBlackBelt = 'yes';    // Error
-isBlackBelt = true;
-
-
-var circ = function (diameter) {
-    return diameter * Math.PI;
+// arrays
+var names = ['luigi', 'mario', 'yoshi'];
+names.push('vishal'); // ok
+// names.push(3);  // Error- Argument of type 'number' is not assignable to parameter of type 'string'
+// names[0] = 5;   // error
+var numbers = [10, 20, 12, 15];
+numbers.push(25); // ok 
+// numbers.push('shaun');      // error
+// numbers[0] = 'shaun';       // error
+var mixed = ['ken', 4, 'chun-li', 8, 9]; //  typescript will look at this and say okay well this is an array now which can contain strings or numbers
+mixed.push('ryu');
+mixed.push(10);
+mixed[0] = 3;
+// objects- same as js object but once the type of properties is decided then it can't be change like propert name has type string
+var ninja = {
+    name: 'mario',
+    belt: 'black',
+    age: 30
 };
-
-// console.log(circ('hello'));    // No error in js whatsoever because js follows dynamic datatype rule therefore no type checking will be done, because typecheck done at compile time not at run time
-console.log(circ(5));
+ninja.age = 40; //ok
+ninja.name = 'ryu'; //ok
+// ninja.age = '30';     // type Error
+// ninja.skills = ['fighting', 'sneaking'];   // we can't just add on extra properties once we've defined the variable or the object to begin with so I can't say ninja and then make up a new property called skills and set that equal to an array of some kind of skills like fighting or maybe sneaking I can't do this because this property skills did not exist on the ninja object to begin with and once we've defined the object we then can't add additional properties to it
+// BUT we can overwrite the whole object by creating object only and not by dot or assignment operator
+// During the overwrite you can't change the initial stucture i.e. the total number of properties and there types, but you can change the there values as shown below 
+ninja = {
+    name: 'yoshi',
+    belt: 'orange',
+    age: 40
+};

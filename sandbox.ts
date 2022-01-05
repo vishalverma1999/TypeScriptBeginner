@@ -1,48 +1,33 @@
-// explicit types
-let character: string = 'vishal';   
-let age: number;
-let isLoggedIn: boolean;
+// 'any' type rips out most of the benefits of using typescript in the first place, like we don't get any errors to help us during development about types, there's no hints to say what type something is expected to be and there's going to be less helpful intellisense here in vs code as well so I would think twice before using this there may be some rare cases when you need to change the type though or when you don't know what type of variable will be in the future
 
-// age = 'luigi';    // type error
-age = 30;
+let age:any = 25;
 
-// isLoggedIn = 25;
-isLoggedIn = true;
+age = true;
+console.log(age);
+age = 'hello';
+console.log(age);
+age = {name: 'luigi'};  
+console.log(age);
+age = ['skcn', 258, true, undefined, null, {name: 'vishal', age: 20}];
+console.log(age);
 
 
-// arrays
-let strArray: string[];   // arroy of strings only
-// strArray.push('vishal');  // error because at the time strArray is not declared, we tell that in future whenever it is declared must be of string type
+// 'any' type In arrays
+let mixed: any[] = [];
 
-let ninjas: string[] = [];   // Empty Array Initialized, here we can use push method since empty array is initialized
-
-ninjas.push('ryu');
-ninjas.push('chun-li');
-console.log(ninjas);
-
-// union types - one or more than one types
-let mixed: (string|number|boolean)[] = [];    // empty array initialized with type string, number and boolean
-mixed.push('hello');
+mixed.push(5);
+mixed.push('mario');
 mixed.push(false);
-mixed.push(20);
 console.log(mixed);
 
-// We can use union types on normal variables as well
-let uid: string|number;   //uid can be string or number
-uid = '123';
-uid = 123;
-console.log(uid);
 
-// object
-let ninjaOne: object;   // ninjaone is object, array is also an object
-ninjaOne = { name: 'yoshi', age: 30 };   // object using curly braces
-ninjaOne = ['vkjdnvd', true, 3543];    // array is also an object
-console.log(ninjaOne);
+// 'any' type In Objects
+let ninja: { name: any, age: any };
 
-// Here ninnjaTwo is the object with curly braces only with explicitly definesd it's property types
-let ninjaTwo: {
-  name: string,
-  age: number,
-  beltColour: string
-};
-ninjaTwo = { name: 'ken', age: 20, beltColour: 'black' };
+ninja = { name: 'yoshi', age: 25 };
+console.log(ninja);
+ninja.name = 'vishal';
+console.log(ninja);
+
+ninja = { name: 25, age: 'yoshi' };
+console.log(ninja);

@@ -1,3 +1,25 @@
+//we don't use an interface to create new IsPerson objects, in this case we'll just use it to say look if we have a variable in the future which is declaring itself to be an IsPerson then it must have these properties and it must have these methods 
+// const me: IsPerson = {};    // Error because at the minute empty object does not comply to interface
+const me = {
+    name: 'Vishal',
+    age: 21,
+    speak(text) {
+        console.log(text);
+    },
+    spend(amount) {
+        console.log('I spent', amount);
+        return amount;
+    },
+};
+console.log(me);
+me.speak('English');
+// benefit of Interface is that we can have multiple different objects that is of type IsPerson, that it implements this interface but they could have different values the methods could be slightly different they all have to be the same signature
+const greetPerson = (person) => {
+    console.log('hello', person.name);
+};
+// greetPerson({name: "jhdsbch"});    // Error - '{ name: string; }' is not assignable to parameter of type 'IsPerson'
+greetPerson(me);
+// -*************************----------------------------------**********************-------------************------------*********--------*
 import { Invoice } from "./classes/Invoice.js"; // while importing use Invoice.js extension instead of Invoice.ts
 // creating object from class
 const invOne = new Invoice('vishal', 'kdhnksjbkc', 400);

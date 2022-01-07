@@ -1,42 +1,16 @@
 import { Invoice } from "./classes/Invoice.js"; // while importing use Invoice.js extension instead of Invoice.ts
 import { Payment } from "./classes/Payment.js";
-// let docOne: HasFormatter;    // In future docOne Variable must be of type HasFormatter
-// let docTwo: HasFormatter;    // In future docTwo Variable must be of type HasFormatter
-// // docOne can be an invoice and docTwo can be a payment Instance because they both implement HasFormatter interface
-// docOne = new Invoice('Prateek', 'Jee prep', 350);
-// docTwo = new Invoice('Anurag', 'Upsc prep', 250);
-// // array which only holds objects which implements HasFormatter interface
-// let docs: HasFormatter[] = [];
-// docs.push(docOne);
-// docs.push(docTwo);
-// console.log(docs);
-// // creating object from class
-// const invOne = new Invoice('vishal', 'kdhnksjbkc', 400);
-// const invTwo = new Invoice('Tanny', 'blah blah blah', 100);
-// // by default all properties of class are public, so we can change it once we instantiated an object from the class
-// // invOne.client = 'MunnuDada';
-// invOne.amount = 44224;
-// // console.log(invOne, invTwo);
-// // now the cool thing about using these classes for objects is that if we wanted to in the future we could create maybe an array and only allow invoice objects in the array much like we did string arrays or boolean arrays where only that type is allowed in the array, we can do that with classes or class objects as well
-// // const invoices: string[] = [];   // just like we did this, making an empty array of type string only, we can do that with class also
-// const invoices: Invoice[] = [];     // array of type Invoice class
-// // invoices.push('hello');    // Not allowed
-// // invoices.push({name: 'vishal'});    // Not allowed
-// invoices.push(invOne);     // allowed
-// invoices.push(invTwo);     // allowed
-// invoices.forEach(inv => {
-//     // console.log(inv.client, inv.details, inv.amount, inv.format());    // Property 'details' is private and only accessible within class 'Invoice'
-//     // inv.client = 'something ELse';   //Cannot assign to 'client' because it is a read-only property
-//     console.log(inv.client, inv.amount, inv.format());
-// })
+import { ListTemplate } from "./classes/ListTemplate.js";
 // TypeCasting
 const form = document.querySelector('.new-item-form'); // since we use 'as' keyword then it's never going to be null, now we get all of the right properties and methods available to us in some form of intellisense inside the vs code
-// console.log(form.children);
 // Inputs
 const type = document.querySelector('#type');
 const tofrom = document.querySelector('#tofrom');
 const details = document.querySelector('#details');
 const amount = document.querySelector('#amount');
+// List template Instance
+const ul = document.querySelector('ul'); // grabbing the ul from index.html type is HTMLUListElement
+const list = new ListTemplate(ul); // creating the instance of ListTemplate class
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     let doc;
@@ -46,7 +20,7 @@ form.addEventListener('submit', (e) => {
     else {
         doc = new Payment(tofrom.value, details.value, amount.valueAsNumber);
     }
-    console.log(doc);
+    list.render(doc, type.value, 'end');
 });
 /*
 Two Drawbacks Of Using Module:-

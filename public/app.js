@@ -22,45 +22,24 @@ form.addEventListener('submit', (e) => {
     }
     list.render(doc, type.value, 'end');
 });
-// Generics- Allows Us to create Reusable blocks of code which can be used with different types
-// const addUID = (obj: Object) => {     // here arrow function takes an obj which is any kind of object with any property
-//     let uid = Math.floor((Math.random()*100));
-//     return {...obj, uid};     // properties destructured from obj and extra uid added to it
-// }
-// let docOne = addUID({name:'yoshi', age: 40});
-// console.log(docOne.name);   // Error - if I try to access a property on this docOne like the name which I should be able to do we get an error and that's because it says property name does not exist on this type with a UID property , now why is that well it's because when we pass in an object into this function right we're not specifying exactly what this object should be right and it doesn't know when it returns this new object right here what properties were on the object that we passed in so it doesn't know that a name exists on the object or that an age exists on the object because we've not said that anywhere and it's not captured those inside the function so when it returns this it doesn't know what properties it's going to output right here 
-// ABOVE PROBLEM CAN BE SOLVED IF WE USE GENERIC
-// const addUID = <T>(obj: T) => {
-//   let uid = Math.floor(Math.random() * 100);
-//   return {...obj, uid};
-// }
-// let docOne = addUID({name:'yoshi', age: 40});
-// let docTwo = addUID('hello');   // No sense since random id can't be attached to it BUT This will work fine because type of T or generic is not specified but it will just capture the type and it's specifications
-// console.log(docOne.name);   // ERROR GONE
-// Specifying the type of Generic
-// const addUID = <T extends object>(obj: T) => {
-//   let uid = Math.floor(Math.random() * 100);
-//   return {...obj, uid};
-// }
-// let docOne = addUID({name:'yoshi', age: 40});
-// console.log(docOne.age);
-//We can be more specific in specifying the type of Generic
-// now it's only going to allow in objects which have a name property and that name has to be a string
-const addUID = (obj) => {
-    let uid = Math.floor(Math.random() * 100);
-    return Object.assign(Object.assign({}, obj), { uid });
-};
-let docOne = addUID({ name: 'yoshi', age: 40 }); // This is fine since it contains name property, extra is ok
-console.log(docOne.name);
-//   defining the resource object
-const docThree = {
+// ENUMS - enums are a special type in typescript which allow us to store a set of constants or keywords and associate them with a numeric value
+var ResourceType;
+(function (ResourceType) {
+    ResourceType[ResourceType["BOOK"] = 0] = "BOOK";
+    ResourceType[ResourceType["AUTHOR"] = 1] = "AUTHOR";
+    ResourceType[ResourceType["FILM"] = 2] = "FILM";
+    ResourceType[ResourceType["DIRECTOR"] = 3] = "DIRECTOR";
+})(ResourceType || (ResourceType = {}));
+; // here BOOK , AUTHOR .... are set of constants or keywords
+const docOne = {
     uid: 1,
-    resourceName: 'person',
-    data: { name: 'shaun' }
+    resourceType: ResourceType.BOOK,
+    data: { title: 'name of the wind' }
 };
-const docFour = {
-    uid: 1,
-    resourceName: 'shoppingList',
-    data: ['bread', 'milk']
+const docTwo = {
+    uid: 10,
+    resourceType: ResourceType.DIRECTOR,
+    data: { title: 'name of the wind' }
 };
-console.log(docThree, docFour);
+console.log(docOne);
+console.log(docTwo);

@@ -1,5 +1,7 @@
+import { HasFormatter } from "../interface/HasFormatter.js";
+
 // Classes
-export class Invoice {
+export class Invoice implements HasFormatter {
     // Different properties that invoice object would have, when we create invoice object from class
     // Either you need to directly assign the below properties like-  client: string = 'Vishal'  -or assign it with the help of contructor done below, else error will be thrown
     //three different modifiers we have-
